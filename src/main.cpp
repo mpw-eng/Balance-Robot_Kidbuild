@@ -78,7 +78,7 @@
 #include <Arduino.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
-#include <AsyncElegantOTA.h>
+#include <ElegantOTA.h>
 #include "Control.h"
 #include "MPU6050.h"
 #include "Motors.h"
