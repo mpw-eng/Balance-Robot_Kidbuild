@@ -78,7 +78,7 @@
 #include <Arduino.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
-#include <ElegantOTA.h>
+//#include <ElegantOTA.h>
 #include "Control.h"
 #include "MPU6050.h"
 #include "Motors.h"
@@ -522,7 +522,7 @@ void setup() {
   server.on("/web", handleJoystickHtml);
 
   server.onNotFound (notFound);     // when a client requests an unknown URI (i.e. something other than "/"), call function "handleNotFound"
-  AsyncElegantOTA.begin(&server);   // adding OTA via web-upload with http://192.168.4.1/update
+  //ElegantOTA.begin(&server);        // adding OTA via web-upload with http://192.168.4.1/update
   server.begin();                   // actually start the server
 
   initTimers();
