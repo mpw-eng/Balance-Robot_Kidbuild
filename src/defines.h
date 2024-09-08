@@ -24,15 +24,19 @@
 #define MAX_TARGET_ANGLE 14
 
 // PRO MODE = MORE AGGRESSIVE (MAXIMUN SETTINGS)
-#define MAX_THROTTLE_PRO 780   // Max recommended value: 860
+#define MAX_THROTTLE_PRO 800   // Max recommended value: 860
 #define MAX_STEERING_PRO 260   // Max recommended value: 280
 #define MAX_TARGET_ANGLE_PRO 26   // Max recommended value: 32
 
 // Default control terms for EVO 2
 #define KP 0.32
 #define KD 0.050
-#define KP_THROTTLE 0.080
-#define KI_THROTTLE 0.1
+
+//#define KP_THROTTLE 0.080
+//#define KI_THROTTLE 0.1
+#define KP_THROTTLE 0.08
+#define KI_THROTTLE 0.75   //repeats per sec (1.25)
+
 #define KP_POSITION 0.06
 #define KD_POSITION 0.45
 //#define KI_POSITION 0.02
@@ -44,8 +48,7 @@
 #define KI_THROTTLE_RAISEUP 0.0
 
 #define MAX_CONTROL_OUTPUT 500
-#define ITERM_MAX_ERROR 30   // Iterm windup constants for PI control
-#define ITERM_MAX 10000
+#define ITERM_MAX 180  // +/- 180 deg output of Speed controller to angle controller
 
 #define ANGLE_OFFSET 0.0  // Offset angle for balance (to compensate robot own weight distribution)
 

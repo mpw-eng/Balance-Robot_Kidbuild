@@ -33,6 +33,8 @@ void IRAM_ATTR timer1ISR() {
 			steps1--;
 		else
 			steps1++;
+			
+		ets_delay_us(1);
 
 		digitalWrite(PIN_MOTOR1_STEP, LOW);
 	}
@@ -50,6 +52,8 @@ void IRAM_ATTR timer2ISR() {
 			steps2--;
 		else
 			steps2++;
+		
+		ets_delay_us(1);
 
 		digitalWrite(PIN_MOTOR2_STEP, LOW);
 	}

@@ -16,7 +16,7 @@ float stabilityPDControl(float DT, float input, float setPoint,  float Kp, float
   float output;
 
   error = setPoint - input;
-
+  
   // Kd is implemented in two parts
   //    The biggest one using only the input (sensor) part not the SetPoint input-input(t-1).
   //    And the second using the setpoint to make it a bit more agressive   setPoint-setPoint(t-1)
@@ -33,16 +33,24 @@ float stabilityPDControl(float DT, float input, float setPoint,  float Kp, float
 // PI controller implementation (Proportional, integral). DT in seconds
 float speedPIControl(float DT, int16_t input, int16_t setPoint,  float Kp, float Ki)
 {
+
+  const int16_t gap = 5;
   int16_t error;
+  float aKp;  //adaptive gain
   float output;
 
+  //reduce gain when near zero speed
+  if ((input < gap) && (input > -gap))
+    aKp = Kp/4;
+  else
+    aKp = Kp;
+
   error = setPoint - input;
-  PID_errorSum += constrain(error, -ITERM_MAX_ERROR, ITERM_MAX_ERROR);
+  output = aKp * error; // P-Component
+  PID_errorSum += output*Ki*DT;
   PID_errorSum = constrain(PID_errorSum, -ITERM_MAX, ITERM_MAX);
+  output += PID_errorSum; //I-Component
 
-  //Serial.println(PID_errorSum);
-
-  output = Kp * error + Ki * PID_errorSum * DT; // DT is in miliseconds...
   return (output);
 }
 
