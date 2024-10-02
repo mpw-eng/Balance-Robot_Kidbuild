@@ -233,7 +233,7 @@ int MPU6050_read(int start, uint8_t *buffer, int size)
     return (n);
 
   // Third parameter is true: relase I2C-bus after data is read.
-  Wire.requestFrom(MPU6050_I2C_ADDRESS, size, true);
+  Wire.requestFrom(MPU6050_I2C_ADDRESS, size, 1);
   i = 0;
   while (Wire.available() && i < size)
   {

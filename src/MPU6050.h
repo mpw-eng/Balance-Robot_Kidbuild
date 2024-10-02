@@ -431,7 +431,7 @@
 // lower address, so that has to be corrected.
 // The register part "reg" is only used internally,
 // and are swapped in code.
-typedef union accel_t_gyro_union
+union accel_t_gyro_union
 {
   struct
   {
