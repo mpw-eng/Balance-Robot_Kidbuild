@@ -253,25 +253,7 @@ void processOSCMsg() {
       OSCtoggle[0] = 0;
       modifing_control_parameters = true;
     }
-    // MPW_ENG - Disable PID Tuning
-    // User could adjust KP, KD, KP_THROTTLE and KI_THROTTLE (fadder3,4,5,6)
-    // Now we need to adjust all the parameters all the times because we dont know what parameter has been moved
-    // Kp_user = KP * 2 * OSCfader[0];
-    // Kd_user = KD * 2 * OSCfader[1];
-    // Kp_thr_user = KP_THROTTLE * 2 * OSCfader[2];
-    // Ki_thr_user = KI_THROTTLE * 2 * OSCfader[3];
-    // // Send a special telemetry message with the new parameters
-    // char auxS[50];
-    // sprintf(auxS, "$tP,%d,%d,%d,%d", int(Kp_user * 1000), int(Kd_user * 1000), int(Kp_thr_user * 1000), int(Ki_thr_user * 1000));
 
-
-
-    // Calibration mode??
-    if (OSCpush[2] == 1) {
-      Serial.print("Calibration MODE ");
-      angle_offset = angle_adjusted_filtered;
-      Serial.println(angle_offset);
-    }
 
     // Kill robot => Sleep
     while (OSCtoggle[0] == 1) {
@@ -317,7 +299,7 @@ void loop() {
 
     //Reset buzzer
     if (!wiimote_cal)
-    digitalWrite(PIN_BUZZER, LOW);
+      digitalWrite(PIN_BUZZER, LOW);
 
     //Flash WiFi LED (Wii Remoite Mode)
     if (bWiiActive)
@@ -370,6 +352,7 @@ void loop() {
       }
 
       if (button & BUTTON_UP) {
+        //if Wii controller inactive and Up pressed then zero calibrate Wii controller (flat and level)
         if (!bWiiActive){
           taskB.previous = millis();
           digitalWrite(PIN_BUZZER, HIGH);
